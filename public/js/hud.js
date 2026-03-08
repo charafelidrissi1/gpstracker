@@ -139,6 +139,20 @@ const HUDModule = (() => {
     bar.style.width = `${ratio}%`;
   }
 
+  function updateOdometer(meters) {
+    const el = document.querySelector('#hud-odometer .value');
+    const bar = document.getElementById('odometer-bar');
+    if (!el) return;
+
+    // Convert meters to km
+    const km = (meters / 1000).toFixed(1);
+    el.textContent = km;
+
+    // Bar fills as % of 100,000 km range
+    const ratio = Math.min(meters / 100000000, 1) * 100;
+    bar.style.width = `${ratio}%`;
+  }
+
   function updateDeviceInfo(data) {
     document.getElementById('hud-imei').textContent = data.imei || '--';
     document.getElementById('hud-device-name').textContent = data.name || 'Unnamed';
@@ -201,6 +215,9 @@ const HUDModule = (() => {
 
     const fuel = io['Analog Input 1'] ?? io[9] ?? null;
     if (fuel !== null) updateFuel(fuel);
+
+    const gpsOdo = io['Total Odometer'] ?? io['GPS Odometer'] ?? io[16] ?? null;
+    if (gpsOdo !== null) updateOdometer(gpsOdo);
 
     updateDeviceInfo(data);
     updateIOData(data);
