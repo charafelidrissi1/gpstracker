@@ -1,0 +1,32 @@
+name: Deploy GPS Tracker to VPS
+
+on:
+  push:
+    branches:
+      - main  # Make sure this matches your default branch name (main or master)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect via SSH and deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Navigate to the exact folder on your VPS
+            cd /root/gpstracker/gpstracker
+            
+            # Pull the latest code from GitHub
+            git pull origin main
+            
+            # --- ADD YOUR APP RESTART COMMANDS BELOW ---
+            # If your GPS tracker app has a backend that needs to be restarted 
+            # to see the changes, uncomment and edit the appropriate line below:
+            
+            # systemctl restart traccar
+            # pm2 restart gpstracker
+            # npm install && npm run build
