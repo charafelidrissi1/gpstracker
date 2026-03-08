@@ -2,6 +2,26 @@
  * App Orchestrator — Initializes all modules, WebSocket, and panel switching.
  */
 (function () {
+  // ── Theme Toggle ──
+  const savedTheme = localStorage.getItem('trackpulse_theme') || 'dark';
+  if (savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      if (newTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      localStorage.setItem('trackpulse_theme', newTheme);
+    });
+  }
+
   // Panel navigation
   const navBtns = document.querySelectorAll('.nav-btn');
   const panels = document.querySelectorAll('.panel');
