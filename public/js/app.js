@@ -3,22 +3,21 @@
  */
 (function () {
   // ── Theme Toggle ──
-  const savedTheme = localStorage.getItem('trackpulse_theme') || 'dark';
-  if (savedTheme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
+  const savedTheme = localStorage.getItem('trackpulse_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
 
   const themeToggleBtn = document.getElementById('theme-toggle');
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      if (newTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
+      document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('trackpulse_theme', newTheme);
+      
+      // Update map theme automatically
+      if (typeof MapModule !== 'undefined') {
+        MapModule.setTheme(newTheme === 'light' ? 'carto-light' : 'carto-dark');
+      }
     });
   }
 
@@ -137,7 +136,7 @@
   // ── Settings Logic ──
   const settings = {
     showTrails: localStorage.getItem('trackpulse_showTrails') !== 'false',
-    mapTheme: localStorage.getItem('trackpulse_mapTheme') || 'carto-dark'
+    mapTheme: localStorage.getItem('trackpulse_mapTheme') || 'carto-light'
   };
 
   // Init settings UI
