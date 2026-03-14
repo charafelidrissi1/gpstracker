@@ -1,0 +1,22 @@
+🗄️  Initializing database...
+🌐 WebSocket server attached (path: /ws)
+📡 Teltonika TCP server listening on port 5027
+
+========================================================
+  GPS TRACKING PLATFORM
+========================================================
+  TCP Server  :  port 5027
+  Dashboard   :  http://localhost:3000
+  WebSocket   :  ws://localhost:3000/ws
+========================================================
+
+🌐 Dashboard client connected: ::1
+🌐 Dashboard client disconnected: ::1
+🌐 Dashboard client connected: ::1
+🌐 Dashboard client disconnected: ::1
+🌐 Dashboard client connected: ::1
+🌐 Dashboard client disconnected: ::1
+🌐 Dashboard client connected: ::1
+🌐 Dashboard client disconnected: ::1
+🌐 Dashboard client connected: ::1
+🌐 Dashboard client disconnected: ::1
