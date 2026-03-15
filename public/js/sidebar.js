@@ -56,8 +56,8 @@ const SidebarModule = (() => {
         </div>
         <div class="device-card-details">
           <div class="device-card-detail"><span class="label">Speed</span><span class="val">${pos?.speed ?? '--'} km/h</span></div>
-          <div class="device-card-detail"><span class="label">Sats</span><span class="val">${pos?.satellites ?? '--'}</span></div>
-          <div class="device-card-detail"><span class="label">IMEI</span><span class="val">${d.imei?.slice(-8) || '--'}</span></div>
+          <div class="device-card-detail"><span class="label">Fuel</span><span class="val">${SidebarModule.getFuel(pos)}</span></div>
+          <div class="device-card-detail"><span class="label">Voltage</span><span class="val">${SidebarModule.getVoltage(pos)}</span></div>
           <div class="device-card-detail"><span class="label">Updated</span><span class="val">${pos?.timestamp ? new Date(pos.timestamp).toLocaleTimeString() : '--'}</span></div>
         </div>
       </div>`;
@@ -79,10 +79,10 @@ const SidebarModule = (() => {
   function updateDevice(data) {
     const idx = devices.findIndex(d => d.id === data.deviceId);
     if (idx >= 0) {
-      devices[idx].lastPosition = { lat: data.lat, lng: data.lng, speed: data.speed, angle: data.angle, altitude: data.altitude, satellites: data.satellites, timestamp: data.timestamp };
+      devices[idx].lastPosition = { lat: data.lat, lng: data.lng, speed: data.speed, angle: data.angle, altitude: data.altitude, satellites: data.satellites, timestamp: data.timestamp, io: data.io };
       devices[idx].status = 'online';
     } else {
-      devices.push({ id: data.deviceId, imei: data.imei, name: data.name, status: 'online', lastPosition: { lat: data.lat, lng: data.lng, speed: data.speed, angle: data.angle, altitude: data.altitude, satellites: data.satellites, timestamp: data.timestamp } });
+      devices.push({ id: data.deviceId, imei: data.imei, name: data.name, status: 'online', lastPosition: { lat: data.lat, lng: data.lng, speed: data.speed, angle: data.angle, altitude: data.altitude, satellites: data.satellites, timestamp: data.timestamp, io: data.io } });
     }
     render();
     if (data.deviceId === selectedId || (selectedId === null && devices.length === 1)) {
@@ -199,5 +199,22 @@ const SidebarModule = (() => {
     }
   });
 
-  return { setDevices, updateDevice, select, markOffline, getSelected, renameDevice, deleteDevice, render };
+  function getFuel(pos) {
+    if (!pos) return '-- L';
+    const io = pos.io_data || pos.io?.properties || {};
+    const val = io['Analog Input 1'] ?? io[9] ?? null;
+    return val !== null ? `${val} L` : '-- L';
+  }
+
+  function getVoltage(pos) {
+    if (!pos) return '-- V';
+    const io = pos.io_data || pos.io?.properties || {};
+    const val = io['External Voltage'] ?? io[66] ?? null;
+    if (val === null) return '-- V';
+    // Convert mV to V if needed
+    const volts = val > 100 ? (val / 1000).toFixed(1) : val.toFixed(1);
+    return `${volts} V`;
+  }
+
+  return { setDevices, updateDevice, select, markOffline, getSelected, renameDevice, deleteDevice, render, getFuel, getVoltage };
 })();
