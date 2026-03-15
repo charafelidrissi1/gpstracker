@@ -130,20 +130,16 @@
             <div class="speedometer-container">
               <svg class="speedometer-svg" viewBox="0 0 200 130" id="speedometer-svg">
                 <defs>
-                  <linearGradient id="speed-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#00d4aa"/>
-                    <stop offset="50%" stop-color="#ffc107"/>
-                    <stop offset="100%" stop-color="#ff4757"/>
-                  </linearGradient>
+                  <!-- The linear gradient is removed as per instruction -->
                 </defs>
-                <!-- Background arc -->
-                <path d="M 20 120 A 80 80 0 0 1 180 120" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
-                <!-- Value arc -->
-                <path d="M 20 120 A 80 80 0 0 1 180 120" fill="none" stroke="url(#speed-gradient)" stroke-width="12" stroke-linecap="round" id="speed-arc" stroke-dasharray="0 251.33"/>
+                <!-- Background ring -->
+                <circle cx="100" cy="120" r="80" fill="none" stroke="var(--bg-primary)" stroke-width="1.5" stroke-dasharray="251.33" stroke-dashoffset="0" stroke-linecap="round"/>
+                <!-- Gauge arc -->
+                <path d="M20,120 A80,80 0 0,1 180,120" fill="none" stroke="var(--border-color)" stroke-width="1.5" stroke-linecap="round"/>
+                <path id="speed-arc" d="M20,120 A80,80 0 0,1 180,120" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="0 251.33" stroke-linecap="round" transition="stroke-dasharray 0.5s ease"/>
                 <!-- Needle -->
-                <line x1="100" y1="120" x2="100" y2="50" stroke="#fff" stroke-width="2" id="speed-needle" transform="rotate(-90, 100, 120)"/>
-                <circle cx="100" cy="120" r="6" fill="#1a1a2e"/>
-                <circle cx="100" cy="120" r="4" fill="#00d4aa"/>
+                <line x1="100" y1="120" x2="100" y2="45" stroke="var(--accent)" stroke-width="2" id="speed-needle" transform="rotate(-90, 100, 120)"/>
+                <circle cx="100" cy="120" r="4" fill="var(--bg-secondary)" stroke="var(--accent)" stroke-width="2"/>
               </svg>
               <div class="speed-value" id="speed-value">0</div>
               <div class="speed-unit">km/h</div>
@@ -157,20 +153,19 @@
             <div class="compass-container">
               <svg class="compass-svg" viewBox="0 0 200 200" id="compass-svg">
                 <!-- Compass ring -->
-                <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
-                <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="85" fill="none" stroke="var(--border-color)" stroke-width="1"/>
+                <circle cx="100" cy="100" r="75" fill="none" stroke="var(--bg-primary)" stroke-width="1"/>
                 <!-- Cardinal marks -->
-                <text x="100" y="25" text-anchor="middle" fill="#00d4aa" font-size="14" font-weight="700">N</text>
-                <text x="180" y="105" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12">E</text>
-                <text x="100" y="190" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12">S</text>
-                <text x="20" y="105" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="12">W</text>
+                <text x="100" y="25" text-anchor="middle" fill="var(--text-primary)" font-size="12" font-weight="700">N</text>
+                <text x="180" y="105" text-anchor="middle" fill="var(--text-muted)" font-size="10">E</text>
+                <text x="100" y="190" text-anchor="middle" fill="var(--text-muted)" font-size="10">S</text>
+                <text x="20" y="105" text-anchor="middle" fill="var(--text-muted)" font-size="10">W</text>
                 <!-- Tick marks -->
                 <g id="compass-ticks"></g>
                 <!-- Needle -->
-                <polygon points="100,30 94,100 100,95 106,100" fill="#00d4aa" id="compass-needle"/>
-                <polygon points="100,170 94,100 100,105 106,100" fill="rgba(255,255,255,0.2)"/>
-                <circle cx="100" cy="100" r="5" fill="#1a1a2e"/>
-                <circle cx="100" cy="100" r="3" fill="#00d4aa"/>
+                <polygon points="100,30 96,100 100,97 104,100" fill="var(--accent)" id="compass-needle"/>
+                <polygon points="100,170 96,100 100,103 104,100" fill="var(--text-muted)" opacity="0.3"/>
+                <circle cx="100" cy="100" r="3" fill="var(--bg-secondary)" stroke="var(--accent)" stroke-width="1.5"/>
               </svg>
               <div class="compass-value" id="compass-value">0°</div>
             </div>

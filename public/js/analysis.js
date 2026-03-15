@@ -12,18 +12,27 @@ const AnalysisModule = (() => {
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: 'rgba(15,15,35,0.9)',
-        titleColor: '#00d4aa',
-        bodyColor: '#e8e8f0',
-        borderColor: 'rgba(255,255,255,0.1)',
+        backgroundColor: '#ffffff',
+        titleColor: '#111827',
+        bodyColor: '#4b5563',
+        borderColor: '#e5e7eb',
         borderWidth: 1,
-        cornerRadius: 8,
-        padding: 10
+        cornerRadius: 6,
+        padding: 12,
+        boxPadding: 6,
+        usePointStyle: true
       }
     },
     scales: {
-      x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.4)', maxTicksLimit: 12 } },
-      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.4)' }, beginAtZero: true }
+      x: { 
+        grid: { color: '#f3f4f6', drawBorder: false }, 
+        ticks: { color: '#9ca3af', font: { family: 'Inter', size: 11 }, maxTicksLimit: 12 } 
+      },
+      y: { 
+        grid: { color: '#f3f4f6', drawBorder: false }, 
+        ticks: { color: '#9ca3af', font: { family: 'Inter', size: 11 } }, 
+        beginAtZero: true 
+      }
     }
   };
 
@@ -33,14 +42,14 @@ const AnalysisModule = (() => {
     if (sCtx && !speedChart) {
       speedChart = new Chart(sCtx, {
         type: 'line',
-        data: { labels: [], datasets: [{ data: [], borderColor: '#00d4aa', backgroundColor: 'rgba(0,212,170,0.1)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 }] },
+        data: { labels: [], datasets: [{ data: [], borderColor: '#000000', backgroundColor: 'rgba(0,0,0,0.03)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 }] },
         options: chartOpts
       });
     }
     if (aCtx && !altitudeChart) {
       altitudeChart = new Chart(aCtx, {
         type: 'line',
-        data: { labels: [], datasets: [{ data: [], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 }] },
+        data: { labels: [], datasets: [{ data: [], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.03)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 }] },
         options: chartOpts
       });
     }
