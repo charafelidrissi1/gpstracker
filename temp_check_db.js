@@ -8,28 +8,21 @@ async function check() {
   const filebuffer = fs.readFileSync(dbPath);
   const db = new SQL.Database(filebuffer);
 
+  console.log('--- ALL DEVICES ---');
+  const allDevices = db.exec('SELECT * FROM devices');
+  console.log(JSON.stringify(allDevices, null, 2));
+
   const imei = '350317170767788';
-  console.log(`Checking data for IMEI: ${imei}`);
+  console.log(`\n--- DATA FOR IMEI: ${imei} ---`);
+  const specific = db.exec(`SELECT * FROM devices WHERE imei LIKE '%${imei.slice(-8)}%'`);
+  console.log(JSON.stringify(specific, null, 2));
 
-  const deviceStmt = db.prepare(`SELECT id, name, last_seen, status FROM devices WHERE imei = '${imei}'`);
-  const deviceRows = [];
-  while (deviceStmt.step()) {
-    deviceRows.push(deviceStmt.getAsObject());
-  }
-  deviceStmt.free();
-  console.log('Device info:', JSON.stringify(deviceRows, null, 2));
-
-  if (deviceRows.length > 0) {
-    const deviceId = deviceRows[0].id;
-    const posStmt = db.prepare(`SELECT latitude, longitude, altitude, speed, satellites, timestamp FROM positions WHERE device_id = ${deviceId} ORDER BY timestamp DESC LIMIT 10`);
-    const posRows = [];
-    while (posStmt.step()) {
-      posRows.push(posStmt.getAsObject());
-    }
-    posStmt.free();
-    console.log('Latest positions:', JSON.stringify(posRows, null, 2));
-  } else {
-    console.log('Device not found in database.');
+  if (specific.length > 0 && specific[0].values.length > 0) {
+     for (const row of specific[0].values) {
+        const id = row[0];
+        const lastPos = db.exec(`SELECT * FROM positions WHERE device_id = ${id} ORDER BY timestamp DESC LIMIT 1`);
+        console.log(`Last pos for ID ${id}:`, JSON.stringify(lastPos, null, 2));
+     }
   }
 }
 
