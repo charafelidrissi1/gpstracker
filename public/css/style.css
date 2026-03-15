@@ -484,29 +484,48 @@ body {
 .sidebar.collapsed .device-card {
   padding: var(--space-md) var(--space-xs);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-}
-
-.sidebar.collapsed .device-card-details {
-  display: none;
+  gap: var(--space-xs);
 }
 
 .sidebar.collapsed .device-card-header {
   margin: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sidebar.collapsed .device-card-header > div {
+  width: 100%;
+  display: flex;
   justify-content: center;
+  gap: 0 !important;
 }
 
 .sidebar.collapsed .device-card-name {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 500;
   text-align: center;
-  width: 100%;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text-primary);
+}
+
+.sidebar.collapsed .device-card-status {
+  font-size: 0; /* Hide text */
+  margin: 0;
+}
+
+.sidebar.collapsed .device-card-status .dot {
+  width: 8px;
+  height: 8px;
+  margin: 0;
 }
 
 .sidebar.collapsed .device-card-status {
