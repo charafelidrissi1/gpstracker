@@ -468,8 +468,8 @@ body {
 }
 
 .sidebar.collapsed {
-  width: 84px;
-  min-width: 84px;
+  width: 90px;
+  min-width: 90px;
 }
 
 .sidebar.collapsed .sidebar-header {
@@ -482,11 +482,12 @@ body {
 }
 
 .sidebar.collapsed .device-card {
-  padding: var(--space-md) var(--space-xs);
+  padding: var(--space-md) 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xs);
+  gap: 8px;
+  overflow: hidden;
 }
 
 .sidebar.collapsed .device-card-header {
@@ -495,40 +496,53 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  overflow: hidden;
 }
 
 .sidebar.collapsed .device-card-header > div {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
   gap: 0 !important;
+  overflow: hidden;
 }
 
 .sidebar.collapsed .device-card-name {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 500;
-  text-align: center;
-  max-width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: var(--text-primary);
+  display: block !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  text-align: center !important;
+  width: 100% !important;
+  max-width: 70px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  color: var(--text-primary) !important;
+  margin: 0 auto !important;
 }
 
 .sidebar.collapsed .device-card-status {
-  font-size: 0; /* Hide text */
-  margin: 0;
+  font-size: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .sidebar.collapsed .device-card-status .dot {
-  width: 8px;
-  height: 8px;
-  margin: 0;
+  width: 8px !important;
+  height: 8px !important;
+  margin: 0 !important;
+  display: block !important;
 }
 
-.sidebar.collapsed .empty-state p,
+.sidebar.collapsed .device-card-details,
+.sidebar.collapsed .btn-edit-device,
+.sidebar.collapsed .btn-delete-device,
+.sidebar.collapsed .sidebar-search {
+  display: none !important;
+}
 .sidebar.collapsed .empty-state .hint {
   display: none;
 }
