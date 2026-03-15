@@ -32,7 +32,10 @@ const SidebarModule = (() => {
       return `<div class="device-card ${isSelected ? 'selected' : ''}" data-device-id="${d.id}" onclick="SidebarModule.select(${d.id})">
         <div class="device-card-header">
           <div class="device-card-header-main">
+            <span class="device-card-dot ${statusClass}"></span>
             <span class="device-card-name">${d.name || d.imei || 'Device ' + d.id}</span>
+          </div>
+          <div class="device-card-actions">
             <button class="btn-edit-device" onclick="event.stopPropagation(); SidebarModule.renameDevice(${d.id})" title="Edit Name">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -46,7 +49,6 @@ const SidebarModule = (() => {
               </svg>
             </button>
           </div>
-          <span class="device-card-status ${statusClass}"><span class="dot"></span>${d.status}</span>
         </div>
         <div class="device-card-details">
           <div class="device-card-detail"><span class="label">Speed</span><span class="val">${pos?.speed ?? '--'} km/h</span></div>
