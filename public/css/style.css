@@ -5,30 +5,33 @@
 
 /* ── Design Tokens ── */
 :root {
-  /* Colors */
-  --bg-primary: #0a0a1a;
-  --bg-secondary: #0f0f23;
-  --bg-card: rgba(20, 20, 45, 0.7);
-  --bg-card-hover: rgba(25, 25, 55, 0.85);
-  --bg-glass: rgba(15, 15, 35, 0.65);
-  --bg-input: rgba(20, 20, 45, 0.5);
+  /* Colors - Premium Cyberpunk/Tech Palette */
+  --bg-primary: #05050f;
+  --bg-secondary: #08081a;
+  --bg-card: rgba(13, 13, 35, 0.4);
+  --bg-card-hover: rgba(18, 18, 45, 0.6);
+  --bg-glass: rgba(8, 8, 20, 0.7);
+  --bg-input: rgba(0, 0, 0, 0.3);
 
-  --border-color: rgba(255, 255, 255, 0.06);
-  --border-glow: rgba(0, 212, 170, 0.2);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 255, 200, 0.3);
 
-  --text-primary: #e8e8f0;
-  --text-secondary: rgba(232, 232, 240, 0.6);
-  --text-muted: rgba(232, 232, 240, 0.35);
+  --text-primary: #f0f0f7;
+  --text-secondary: rgba(240, 240, 247, 0.7);
+  --text-muted: rgba(240, 240, 247, 0.4);
 
-  --accent: #00d4aa;
-  --accent-light: #00f5c8;
-  --accent-dark: #00a885;
-  --accent-glow: rgba(0, 212, 170, 0.15);
+  --accent: #00ffc8;
+  --accent-light: #60ffe3;
+  --accent-dark: #00b38c;
+  --accent-glow: rgba(0, 255, 200, 0.2);
+  
+  --secondary: #7000ff;
+  --secondary-glow: rgba(112, 0, 255, 0.3);
 
-  --danger: #ff4757;
-  --warning: #ffc107;
-  --success: #00d4aa;
-  --info: #3b82f6;
+  --danger: #ff3366;
+  --warning: #ffcc00;
+  --success: #00ffc8;
+  --info: #00d2ff;
 
   /* Spacing */
   --space-xs: 4px;
@@ -39,29 +42,34 @@
   --space-2xl: 48px;
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: 'Outfit', 'Inter', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(0, 212, 170, 0.1);
+  /* Shadows & Glows */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.8);
+  --shadow-glow: 0 0 30px rgba(0, 255, 200, 0.15);
+  --inner-glow: inset 0 0 12px rgba(255, 255, 255, 0.05);
 
   /* Layout */
-  --topbar-height: 56px;
-  --sidebar-width: 280px;
+  --topbar-height: 64px;
+  --sidebar-width: 300px;
 
   /* Transitions */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 200ms cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-normal: 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-slow: 700ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Blur */
+  --blur-md: blur(12px);
+  --blur-lg: blur(32px);
 }
 
 /* ── Light Theme Overrides (Premium Light Mode) ── */
@@ -259,6 +267,10 @@ html, body {
 body {
   font-family: var(--font-sans);
   background: var(--bg-primary);
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -285,19 +297,22 @@ body {
    ═══════════════════════════════════════════ */
 .topbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 12px;
+  left: 12px;
+  right: 12px;
   height: var(--topbar-height);
   background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border-color);
+  -webkit-backdrop-filter: var(--blur-md);
+  backdrop-filter: var(--blur-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-xl);
   z-index: 1000;
+  box-shadow: var(--shadow-lg), var(--inner-glow);
+  transition: all var(--transition-normal);
 }
 
 .topbar-brand {
@@ -336,27 +351,45 @@ body {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-sm) var(--space-lg);
   background: transparent;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   color: var(--text-secondary);
   font-family: var(--font-sans);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
 }
 
 .nav-btn:hover {
   background: rgba(255, 255, 255, 0.05);
   color: var(--text-primary);
+  transform: translateY(-1px);
 }
 
 .nav-btn.active {
   background: var(--accent-glow);
   border-color: var(--border-glow);
   color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 3px;
+  background: var(--accent);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .topbar-status {
@@ -419,17 +452,24 @@ body {
 .sidebar {
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
-  background: var(--bg-secondary);
-  border-right: 1px solid var(--border-color);
+  background: var(--bg-glass);
+  -webkit-backdrop-filter: var(--blur-md);
+  backdrop-filter: var(--blur-md);
+  border: 1px solid var(--border-color);
+  margin: 12px;
+  margin-right: 0;
+  border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   transition: all var(--transition-slow);
   overflow: hidden;
+  box-shadow: var(--shadow-lg), var(--inner-glow);
+  z-index: 900;
 }
 
 .sidebar.collapsed {
-  width: 72px;
-  min-width: 72px;
+  width: 84px;
+  min-width: 84px;
 }
 
 .sidebar.collapsed .sidebar-header {
@@ -509,16 +549,19 @@ body {
   background: var(--bg-input);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
-  padding: 8px 12px 8px 32px;
-  border-radius: var(--radius-sm);
+  padding: 10px 12px 10px 36px;
+  border-radius: var(--radius-md);
   font-size: 0.85rem;
   transition: all var(--transition-fast);
+  border-bottom: 2px solid transparent;
 }
 
 .sidebar-search input:focus {
   outline: none;
+  background: rgba(0, 0, 0, 0.4);
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(0, 212, 170, 0.2);
+  border-bottom-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-search .search-icon {
@@ -766,19 +809,19 @@ body {
 /* Map HUD Overlay */
 .map-hud {
   position: absolute;
-  bottom: var(--space-lg);
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: var(--space-md);
-  padding: var(--space-sm) var(--space-lg);
+  padding: 12px 24px;
   background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: var(--blur-md);
+  backdrop-filter: var(--blur-md);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   z-index: 800;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-lg), var(--inner-glow);
 }
 
 .map-hud-item {
@@ -862,13 +905,17 @@ body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: var(--blur-md);
+  backdrop-filter: var(--blur-md);
   transition: all var(--transition-normal);
+  box-shadow: var(--inner-glow);
 }
 
 .hud-card:hover {
+  background: var(--bg-card-hover);
   border-color: var(--border-glow);
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--shadow-glow), var(--inner-glow);
+  transform: translateY(-4px);
 }
 
 .hud-card h3 {
@@ -898,12 +945,16 @@ body {
 
 .speed-value {
   font-family: var(--font-mono);
-  font-size: 2rem;
+  font-size: 2.75rem;
   font-weight: 900;
   color: var(--accent);
-  margin-top: -20px;
+  margin-top: -24px;
   text-align: center;
-  text-shadow: 0 0 15px rgba(0, 212, 170, 0.3);
+  text-shadow: 0 0 20px var(--accent-glow);
+  background: linear-gradient(180deg, #fff, var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .speed-unit {
@@ -971,18 +1022,20 @@ body {
 }
 
 .info-bar {
-  height: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 3px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
   margin-top: var(--space-md);
   overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .info-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--accent), var(--accent-light));
-  border-radius: 3px;
+  border-radius: 4px;
   transition: width var(--transition-slow);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .info-bar-fill.battery-bar {
@@ -1222,7 +1275,8 @@ body {
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   margin-bottom: var(--space-lg);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: var(--blur-md);
+  backdrop-filter: var(--blur-md);
 }
 
 .form-card h3 {
@@ -1346,7 +1400,8 @@ body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: var(--blur-md);
+  backdrop-filter: var(--blur-md);
 }
 
 .analysis-card h3 {
@@ -1395,6 +1450,26 @@ body {
 }
 
 /* Trips Table */
+.trips-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: var(--space-sm);
+}
+
+.trips-title {
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.trips-card .action-buttons {
+  display: flex;
+  gap: var(--space-sm);
+}
+
 .trips-table-wrapper {
   overflow-x: auto;
 }
