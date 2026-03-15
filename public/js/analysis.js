@@ -2,58 +2,11 @@
  * Analysis Module — Charts, stats, and trip history.
  */
 const AnalysisModule = (() => {
-  let speedChart = null;
-  let altitudeChart = null;
   let currentTrips = [];
 
-  const chartOpts = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        backgroundColor: '#ffffff',
-        titleColor: '#111827',
-        bodyColor: '#4b5563',
-        borderColor: '#e5e7eb',
-        borderWidth: 1,
-        cornerRadius: 6,
-        padding: 12,
-        boxPadding: 6,
-        usePointStyle: true
-      }
-    },
-    scales: {
-      x: { 
-        grid: { color: '#f3f4f6', drawBorder: false }, 
-        ticks: { color: '#9ca3af', font: { family: 'Inter', size: 11 }, maxTicksLimit: 12 } 
-      },
-      y: { 
-        grid: { color: '#f3f4f6', drawBorder: false }, 
-        ticks: { color: '#9ca3af', font: { family: 'Inter', size: 11 } }, 
-        beginAtZero: true 
-      }
-    }
-  };
+
 
   function initCharts() {
-    const sCtx = document.getElementById('speed-chart');
-    const aCtx = document.getElementById('altitude-chart');
-    if (sCtx && !speedChart) {
-      speedChart = new Chart(sCtx, {
-        type: 'line',
-        data: { labels: [], datasets: [{ data: [], borderColor: '#000000', backgroundColor: 'rgba(0,0,0,0.03)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 }] },
-        options: chartOpts
-      });
-    }
-    if (aCtx && !altitudeChart) {
-      altitudeChart = new Chart(aCtx, {
-        type: 'line',
-        data: { labels: [], datasets: [{ data: [], borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.03)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2 }] },
-        options: chartOpts
-      });
-    }
-    
     // Bind Export/Print Buttons
     document.getElementById('btn-export-excel')?.addEventListener('click', exportExcel);
     document.getElementById('btn-export-pdf')?.addEventListener('click', exportPDF);
@@ -68,19 +21,7 @@ const AnalysisModule = (() => {
     document.getElementById('stat-positions').textContent = a.positionCount || '--';
   }
 
-  function updateSpeedChart(hist) {
-    if (!speedChart || !hist) return;
-    speedChart.data.labels = hist.map(p => new Date(p.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    speedChart.data.datasets[0].data = hist.map(p => p.speed);
-    speedChart.update('none');
-  }
 
-  function updateAltitudeChart(pos) {
-    if (!altitudeChart || !pos) return;
-    altitudeChart.data.labels = pos.map(p => new Date(p.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    altitudeChart.data.datasets[0].data = pos.map(p => p.altitude);
-    altitudeChart.update('none');
-  }
 
   function updateTrips(trips) {
     currentTrips = trips || [];
@@ -118,8 +59,6 @@ const AnalysisModule = (() => {
         fetch(`/api/devices/${deviceId}/trips?from=${from}&to=${to}`).then(r => r.json())
       ]);
       updateStats(analytics);
-      updateSpeedChart(analytics.speedHistory);
-      updateAltitudeChart(positions);
       updateTrips(trips);
     } catch (e) { console.error('Error loading analysis:', e); }
   }
