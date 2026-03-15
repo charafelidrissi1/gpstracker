@@ -29,13 +29,9 @@ const SidebarModule = (() => {
       return;
     }
 
-    list.innerHTML = filtered.map(d => {
-      const pos = d.lastPosition;
-      const isSelected = d.id === selectedId;
-      const statusClass = d.status === 'online' ? 'online' : 'offline';
       return `<div class="device-card ${isSelected ? 'selected' : ''}" data-device-id="${d.id}" onclick="SidebarModule.select(${d.id})">
         <div class="device-card-header">
-          <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="device-card-header-main">
             <span class="device-card-name">${d.name || d.imei || 'Device ' + d.id}</span>
             <button class="btn-edit-device" onclick="event.stopPropagation(); SidebarModule.renameDevice(${d.id})" title="Edit Name">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

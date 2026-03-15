@@ -680,9 +680,18 @@ body {
   margin-bottom: var(--space-sm);
 }
 
+.device-card-header-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .device-card-name {
   font-weight: 600;
   font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-edit-device, .btn-delete-device {
