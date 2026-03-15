@@ -5,33 +5,33 @@
 
 /* ── Design Tokens ── */
 :root {
-  /* Colors - Premium Cyberpunk/Tech Palette */
-  --bg-primary: #05050f;
-  --bg-secondary: #08081a;
-  --bg-card: rgba(13, 13, 35, 0.4);
-  --bg-card-hover: rgba(18, 18, 45, 0.6);
-  --bg-glass: rgba(8, 8, 20, 0.7);
-  --bg-input: rgba(0, 0, 0, 0.3);
+  /* Colors - Premium Light Palette */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-input: #f1f5f9;
 
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(0, 255, 200, 0.3);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-glow: rgba(0, 212, 170, 0.15);
 
-  --text-primary: #f0f0f7;
-  --text-secondary: rgba(240, 240, 247, 0.7);
-  --text-muted: rgba(240, 240, 247, 0.4);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
 
-  --accent: #00ffc8;
-  --accent-light: #60ffe3;
-  --accent-dark: #00b38c;
-  --accent-glow: rgba(0, 255, 200, 0.2);
+  --accent: #00a885;
+  --accent-light: #00c99e;
+  --accent-dark: #008a6e;
+  --accent-glow: rgba(0, 168, 133, 0.08);
   
-  --secondary: #7000ff;
-  --secondary-glow: rgba(112, 0, 255, 0.3);
+  --secondary: #6366f1;
+  --secondary-glow: rgba(99, 102, 241, 0.1);
 
-  --danger: #ff3366;
-  --warning: #ffcc00;
-  --success: #00ffc8;
-  --info: #00d2ff;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --success: #10b981;
+  --info: #0ea5e9;
 
   /* Spacing */
   --space-xs: 4px;
@@ -52,11 +52,11 @@
   --radius-xl: 32px;
 
   /* Shadows & Glows */
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.8);
-  --shadow-glow: 0 0 30px rgba(0, 255, 200, 0.15);
-  --inner-glow: inset 0 0 12px rgba(255, 255, 255, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 15px rgba(0, 168, 133, 0.05);
+  --inner-glow: inset 0 0 1px rgba(0, 0, 0, 0.05);
 
   /* Layout */
   --topbar-height: 64px;
@@ -72,78 +72,51 @@
   --blur-lg: blur(32px);
 }
 
-/* ── Light Theme Overrides (Premium Light Mode) ── */
-[data-theme="light"] {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
-  --bg-glass: rgba(255, 255, 255, 0.8);
-  --bg-input: #f1f5f9;
-
-  --border-color: rgba(0, 0, 0, 0.08);
-  --border-glow: rgba(0, 212, 170, 0.15);
-
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-
-  --accent: #00a885;
-  --accent-light: #00c99e;
-  --accent-dark: #008a6e;
-  --accent-glow: rgba(0, 168, 133, 0.08);
-
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --shadow-glow: 0 0 15px rgba(0, 168, 133, 0.05);
-}
-
-/* Light theme specific fixes for hardcoded dark colors */
-[data-theme="light"] .leaflet-container {
+/* Base styles refinement for light theme */
+.leaflet-container {
   background: var(--bg-primary) !important;
 }
 
-[data-theme="light"] .leaflet-control-attribution {
+.leaflet-control-attribution {
   background: rgba(255, 255, 255, 0.85) !important;
   color: var(--text-muted) !important;
 }
 
-[data-theme="light"] .speedometer-svg circle[fill="#1a1a2e"],
-[data-theme="light"] .compass-svg circle[fill="#1a1a2e"] {
+.speedometer-svg circle[fill="#1a1a2e"],
+.compass-svg circle[fill="#1a1a2e"] {
   fill: #f0f2f5;
 }
 
-[data-theme="light"] .speedometer-svg path[stroke="rgba(255,255,255,0.08)"],
-[data-theme="light"] .compass-svg circle[stroke="rgba(255,255,255,0.08)"] {
+.speedometer-svg path[stroke="rgba(255,255,255,0.08)"],
+.compass-svg circle[stroke="rgba(255,255,255,0.08)"] {
   stroke: rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="light"] .compass-svg circle[stroke="rgba(255,255,255,0.05)"] {
+.compass-svg circle[stroke="rgba(255,255,255,0.05)"] {
   stroke: rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="light"] .compass-svg text[fill="rgba(255,255,255,0.5)"] {
+.compass-svg text[fill="rgba(255,255,255,0.5)"] {
   fill: rgba(0, 0, 0, 0.45);
 }
 
-[data-theme="light"] .compass-svg polygon[fill="rgba(255,255,255,0.2)"] {
+.compass-svg polygon[fill="rgba(255,255,255,0.2)"] {
   fill: rgba(0, 0, 0, 0.15);
 }
 
-[data-theme="light"] .speed-needle {
+.speed-needle {
   stroke: #1a1a2e;
 }
 
-[data-theme="light"] .sat-dot {
+.sat-dot {
   background: rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="light"] .info-row {
+.info-row {
   border-bottom-color: rgba(0, 0, 0, 0.05);
 }
 
-[data-theme="light"] .io-item {
+.io-item {
   background: rgba(0, 0, 0, 0.02);
   border-color: rgba(0, 0, 0, 0.05);
 }

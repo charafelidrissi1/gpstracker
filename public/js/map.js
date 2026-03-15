@@ -10,14 +10,6 @@ const MapModule = (() => {
   let trailCoords = {}; // deviceId -> [latlng]
 
   const MAP_TILES = {
-    'carto-dark': {
-      url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-      attr: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
-    },
-    'carto-light': {
-      url: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      attr: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
-    },
     'google-streets': {
       url: 'https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
       attr: '&copy; Google Maps'
