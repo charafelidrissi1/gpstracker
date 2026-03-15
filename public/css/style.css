@@ -528,10 +528,6 @@ body {
   margin: 0;
 }
 
-.sidebar.collapsed .device-card-status {
-  display: none;
-}
-
 .sidebar.collapsed .empty-state p,
 .sidebar.collapsed .empty-state .hint {
   display: none;
