@@ -29,6 +29,10 @@ const SidebarModule = (() => {
       return;
     }
 
+    list.innerHTML = filtered.map(d => {
+      const pos = d.lastPosition;
+      const isSelected = d.id === selectedId;
+      const statusClass = d.status === 'online' ? 'online' : 'offline';
       return `<div class="device-card ${isSelected ? 'selected' : ''}" data-device-id="${d.id}" onclick="SidebarModule.select(${d.id})">
         <div class="device-card-header">
           <div class="device-card-header-main">
