@@ -468,8 +468,8 @@ body {
 }
 
 .sidebar.collapsed {
-  width: 90px;
-  min-width: 90px;
+  width: 100px;
+  min-width: 100px;
 }
 
 .sidebar.collapsed .sidebar-header {
@@ -482,30 +482,30 @@ body {
 }
 
 .sidebar.collapsed .device-card {
-  padding: var(--space-md) 4px;
+  padding: var(--space-md) 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   overflow: hidden;
 }
 
 .sidebar.collapsed .device-card-header {
   margin: 0;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px;
   overflow: hidden;
 }
 
-.sidebar.collapsed .device-card-header > div {
+.sidebar.collapsed .device-card-header-main {
   width: 100% !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  gap: 0 !important;
+  gap: 4px !important;
   overflow: hidden;
 }
 
@@ -514,33 +514,27 @@ body {
   font-size: 10px !important;
   font-weight: 500 !important;
   text-align: center !important;
-  width: 100% !important;
-  max-width: 70px !important;
+  width: 80px !important;
+  max-width: 80px !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   color: var(--text-primary) !important;
-  margin: 0 auto !important;
 }
 
-.sidebar.collapsed .device-card-status {
-  font-size: 0 !important;
-  margin: 0 !important;
-  display: flex !important;
-  justify-content: center !important;
-}
-
-.sidebar.collapsed .device-card-status .dot {
-  width: 8px !important;
-  height: 8px !important;
+.sidebar.collapsed .device-card-dot {
+  width: 10px !important;
+  height: 10px !important;
   margin: 0 !important;
   display: block !important;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
 }
 
 .sidebar.collapsed .device-card-details,
-.sidebar.collapsed .btn-edit-device,
-.sidebar.collapsed .btn-delete-device,
-.sidebar.collapsed .sidebar-search {
+.sidebar.collapsed .device-card-actions,
+.sidebar.collapsed .sidebar-search,
+.sidebar.collapsed .device-count {
   display: none !important;
 }
 .sidebar.collapsed .empty-state .hint {
@@ -680,21 +674,38 @@ body {
   margin-bottom: var(--space-sm);
 }
 
-.device-card-header-main {
+.device-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.device-card-dot.online {
+  background: var(--success);
+  box-shadow: 0 0 10px var(--success-glow);
+}
+
+.device-card-dot.offline {
+  background: var(--text-muted);
+}
+
+.device-card-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
-.device-card-name {
+.device-card-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   font-weight: 600;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: var(--text-secondary);
 }
-
-.btn-edit-device, .btn-delete-device {
   background: transparent;
   border: none;
   color: var(--text-muted);
