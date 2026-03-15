@@ -706,6 +706,8 @@ body {
   font-weight: 600;
   color: var(--text-secondary);
 }
+
+.btn-edit-device, .btn-delete-device {
   background: transparent;
   border: none;
   color: var(--text-muted);
