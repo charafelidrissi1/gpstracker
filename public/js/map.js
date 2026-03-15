@@ -46,8 +46,8 @@ const MapModule = (() => {
       attributionControl: true
     });
 
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    setTheme(currentTheme === 'light' ? 'carto-light' : 'carto-dark');
+    const savedMapTheme = localStorage.getItem('trackpulse_mapTheme') || 'google-streets';
+    setTheme(savedMapTheme);
 
     // Fix map sizing
     setTimeout(() => map.invalidateSize(), 200);
@@ -60,19 +60,19 @@ const MapModule = (() => {
       map.removeLayer(currentTileLayer);
     }
     
-    const tileSpec = MAP_TILES[theme] || MAP_TILES['carto-dark'];
+    // Always fallback to google-streets if theme is invalid/missing
+    const tileSpec = MAP_TILES[theme] || MAP_TILES['google-streets'];
     currentTileLayer = L.tileLayer(tileSpec.url, {
       attribution: tileSpec.attr,
       maxZoom: 19,
       subdomains: 'abcd'
     }).addTo(map);
     
-    // Toggle popup light/dark class
-    const isDark = (theme === 'carto-dark');
+    // All popups are light now for consistency
     for (const id in markers) {
         const popup = markers[id].getPopup();
         if (popup) {
-            popup.options.className = isDark ? 'dark-popup' : 'light-popup';
+            popup.options.className = 'light-popup';
         }
     }
   }
